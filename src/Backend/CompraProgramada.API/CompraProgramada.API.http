@@ -1,0 +1,6 @@
+@CompraProgramada.API_HostAddress = http://localhost:5047
+
+GET {{CompraProgramada.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
