@@ -5,6 +5,7 @@ on:
     branches: [ main, develop ]
   pull_request:
     branches: [ main ]
+  workflow_call:
 
 jobs:
   build-and-test:
@@ -17,7 +18,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
 
       - name: Cache NuGet
         uses: actions/cache@v4
@@ -27,10 +28,10 @@ jobs:
           restore-keys: nuget-
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore src/Backend/CompraProgramada.sln
 
       - name: Build
-        run: dotnet build -c Release --no-restore
+        run: dotnet build src/Backend/CompraProgramada.sln -c Release --no-restore
 
       - name: Test
-        run: dotnet test -c Release --no-build --verbosity normal
+        run: dotnet test src/Backend/CompraProgramada.sln -c Release --no-build --verbosity normal
