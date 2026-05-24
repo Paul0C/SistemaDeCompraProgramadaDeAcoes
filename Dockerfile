@@ -1,22 +1,25 @@
 # Build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY *.sln .
-COPY src/*/*.csproj ./
-RUN for f in *.csproj; do mkdir -p "src/$(basename $f .csproj)" && mv "$f" "src/$(basename $f .csproj)/"; done
-COPY tests/*/*.csproj ./
-RUN for f in *.csproj; do mkdir -p "tests/$(basename $f .csproj)" && mv "$f" "tests/$(basename $f .csproj)/"; done
+# Copy solution + csproj files first so restore is cached separately from source changes
+COPY src/Backend/CompraProgramada.sln                                               src/Backend/
+COPY src/Backend/CompraProgramada.API/CompraProgramada.API.csproj                   src/Backend/CompraProgramada.API/
+COPY src/Backend/CompraProgramada.Application/CompraProgramada.Application.csproj   src/Backend/CompraProgramada.Application/
+COPY src/Backend/CompraProgramada.Domain/CompraProgramada.Domain.csproj             src/Backend/CompraProgramada.Domain/
+COPY src/Backend/CompraProgramada.Infrastructure/CompraProgramada.Infrastructure.csproj src/Backend/CompraProgramada.Infrastructure/
+COPY tests/tests.csproj                                                              tests/
 
-RUN dotnet restore
+RUN dotnet restore src/Backend/CompraProgramada.sln
 
+# Copy everything else and build
 COPY . .
-RUN dotnet build -c Release --no-restore
-RUN dotnet test -c Release --no-build --no-restore
-RUN dotnet publish src/CompraProgramada.API -c Release --no-build -o /app/publish
+RUN dotnet build src/Backend/CompraProgramada.sln -c Release --no-restore
+RUN dotnet test src/Backend/CompraProgramada.sln -c Release --no-build --verbosity normal
+RUN dotnet publish src/Backend/CompraProgramada.API/CompraProgramada.API.csproj -c Release --no-build -o /app/publish
 
 # Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 COPY --from=build /app/publish .
 EXPOSE 8080
