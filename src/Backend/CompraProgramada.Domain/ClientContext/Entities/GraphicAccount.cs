@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 using CompraProgramada.Domain.ClientContext.Enums;
 using CompraProgramada.Domain.ClientContext.Events;
 using CompraProgramada.Domain.ClientContext.ValueObjects;
-using CompraProgramada.Domain.Shared;
+using CompraProgramada.Domain.SharedContext;
 
 namespace CompraProgramada.Domain.ClientContext.Entities;
 

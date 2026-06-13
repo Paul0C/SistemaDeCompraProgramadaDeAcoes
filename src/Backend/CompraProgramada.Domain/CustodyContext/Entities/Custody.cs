@@ -1,5 +1,3 @@
-using CompraProgramada.Domain.ClientContext.Enums;
-using CompraProgramada.Domain.Shared;
 using CompraProgramada.Domain.SharedContext;
 
 namespace CompraProgramada.Domain.CustodyContext.Entities;

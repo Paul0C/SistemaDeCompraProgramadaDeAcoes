@@ -1,6 +1,6 @@
 using System.ComponentModel.Design;
 using CompraProgramada.Domain.ClientContext.ValueObjects;
-using CompraProgramada.Domain.Shared;
+using CompraProgramada.Domain.SharedContext;
 using CompraProgramada.Domain.SharedContext;
 
 namespace CompraProgramada.Domain.ClientContext.Entities;

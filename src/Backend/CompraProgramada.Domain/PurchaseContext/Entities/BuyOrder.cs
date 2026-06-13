@@ -1,6 +1,5 @@
 using CompraProgramada.Domain.PurchaseContext.Enums;
 using CompraProgramada.Domain.PurchaseContext.Models;
-using CompraProgramada.Domain.Shared;
 using CompraProgramada.Domain.SharedContext;
 
 namespace CompraProgramada.Domain.PurchaseContext.Entities;

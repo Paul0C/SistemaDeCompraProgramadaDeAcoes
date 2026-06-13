@@ -1,6 +1,6 @@
 using CompraProgramada.Domain.SharedContext;
 
-namespace CompraProgramada.Domain.Shared;
+namespace CompraProgramada.Domain.SharedContext;
 
 public abstract class Entity
 {

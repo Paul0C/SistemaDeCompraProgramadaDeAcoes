@@ -1,3 +1,3 @@
-namespace CompraProgramada.Domain.Shared;
+namespace CompraProgramada.Domain.SharedContext;
 
 public abstract record ValueObject;

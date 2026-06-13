@@ -1,0 +1,3 @@
+namespace CompraProgramada.Application.SharedContext.UseCases.Abstractions;
+
+public interface ICommandResponse;

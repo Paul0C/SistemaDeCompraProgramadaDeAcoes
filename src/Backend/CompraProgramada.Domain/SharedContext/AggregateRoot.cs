@@ -1,4 +1,4 @@
-namespace CompraProgramada.Domain.Shared;
+namespace CompraProgramada.Domain.SharedContext;
 
 public abstract class AggregateRoot : Entity
 {

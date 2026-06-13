@@ -1,6 +1,5 @@
 using System.Runtime.InteropServices;
 using CompraProgramada.Domain.RecommendationBasketContext.Events;
-using CompraProgramada.Domain.Shared;
 using CompraProgramada.Domain.SharedContext;
 
 namespace CompraProgramada.Domain.RecommendationBasketContext.Entities;

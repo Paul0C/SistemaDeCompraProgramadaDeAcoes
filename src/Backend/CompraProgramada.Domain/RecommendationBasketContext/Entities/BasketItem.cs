@@ -1,5 +1,4 @@
 using System.Runtime.InteropServices;
-using CompraProgramada.Domain.Shared;
 using CompraProgramada.Domain.SharedContext;
 
 namespace CompraProgramada.Domain.RecommendationBasketContext.Entities;
