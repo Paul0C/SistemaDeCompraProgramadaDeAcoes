@@ -207,7 +207,7 @@ public class RecommendationBasketTest
         var basket = CreateValidBasket();
 
         // Act
-        basket.ChangeBasket();
+        basket.DesactiveBasket();
 
         // Assert
         basket.Active.Should().BeFalse();
@@ -221,7 +221,7 @@ public class RecommendationBasketTest
         var before = DateTime.Now;
 
         // Act
-        basket.ChangeBasket();
+        basket.DesactiveBasket();
 
         // Assert
         basket.DeactivationDate.Should().NotBeNull();
