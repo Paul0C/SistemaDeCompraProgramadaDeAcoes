@@ -60,7 +60,7 @@ public sealed class RecommendationBasket : AggregateRoot
     public static RecommendationBasket CreateWithRebalancing(string name,
         List<(string Ticker, decimal Percentage)> items, RecommendationBasket actualBasket)
     {
-        var recommendationBasket = RecommendationBasket.Create(name, items);
+        var recommendationBasket = Create(name, items);
         
         var stocksOldBasket = actualBasket.BasketItems.Select(bi => (bi.Ticker, bi.Percentage)).ToList();
         recommendationBasket.AddDomainEvent(new RebalancingChangedBasketEvent(stocksOldBasket, items));
@@ -69,9 +69,12 @@ public sealed class RecommendationBasket : AggregateRoot
         
     }
     
-    public void ChangeBasket()
+    public void DesactiveBasket()
     {
-        Active = !Active;
-        DeactivationDate = DateTime.Now;
+        if (Active)
+        {
+            Active = !Active;
+            DeactivationDate = DateTime.Now;
+        }
     }
 }

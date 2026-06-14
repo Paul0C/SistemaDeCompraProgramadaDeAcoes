@@ -16,7 +16,7 @@ public class ClientsController(IMediator mediator) : ControllerBase
     {
         var client = await mediator.Send(command);
         return client.IsSuccess
-            ? Ok(client)
+            ? StatusCode(StatusCodes.Status201Created, client)
             : BadRequest(client);
     }
 }
