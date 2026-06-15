@@ -37,16 +37,24 @@ public record CreateRecommendationBasketWithRebalancingCommandResponse : IComman
     public IReadOnlyCollection<string> AssetsAdded  { get; init;}
     public string Message { get; init; }
     
-    public CreateRecommendationBasketWithRebalancingCommandResponse(RecommendationBasket recommendationBasket)
+    public CreateRecommendationBasketWithRebalancingCommandResponse(RecommendationBasket recommendationBasket, RecommendationBasket recommendationBasketDeactived, int totalActiveClients)
     {
         BasketId = recommendationBasket.Id;
         Name = recommendationBasket.Name;
         Active = recommendationBasket.Active;
         CreateDate = recommendationBasket.CreateDate;
         Items = recommendationBasket.BasketItems.Select(i => new CreateRecommendationBasketItems(i.Ticker, i.Percentage)).ToList();
-        PreviousBasketDeactived = new PreviousBasketDeactivedResponse(recommendationBasket.Id,
-            recommendationBasket.Name, recommendationBasket.DeactivationDate.Value);
-        Message = "First basket successfully registered.";
+        PreviousBasketDeactived = new PreviousBasketDeactivedResponse(recommendationBasketDeactived.Id,
+            recommendationBasketDeactived.Name, recommendationBasketDeactived.DeactivationDate.Value);
+        AssetsRemoved = recommendationBasketDeactived.BasketItems.Select(bki => bki.Ticker)
+            .Except(recommendationBasket.BasketItems
+                .Select(bki => bki.Ticker))
+            .ToList();
+        AssetsAdded = recommendationBasket.BasketItems.Select(bki => bki.Ticker)
+            .Except(recommendationBasketDeactived.BasketItems
+                .Select(bki => bki.Ticker))
+            .ToList();
+        Message = $"Basket updated. Rebalancing triggered to {totalActiveClients} active clients.";
     }
 }
 

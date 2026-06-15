@@ -1,5 +1,5 @@
 using CompraProgramada.Domain.ClientContext.Entities;
-using CompraProgramada.Domain.ClientContext.Repositories;
+using CompraProgramada.Domain.ClientContext.Abstractions.Repositories;
 using CompraProgramada.Infrastructure.Persistence.SharedContext.Context;
 using Microsoft.EntityFrameworkCore;
 

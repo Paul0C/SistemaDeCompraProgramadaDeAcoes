@@ -1,7 +1,7 @@
 using CompraProgramada.Application.SharedContext.Results;
 using CompraProgramada.Application.SharedContext.UseCases.Abstractions;
 using CompraProgramada.Domain.ClientContext.Entities;
-using CompraProgramada.Domain.ClientContext.Repositories;
+using CompraProgramada.Domain.ClientContext.Abstractions.Repositories;
 using CompraProgramada.Domain.ClientContext.ValueObjects;
 using CompraProgramada.Domain.SharedContext;
 
