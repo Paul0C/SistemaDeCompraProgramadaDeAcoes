@@ -11,4 +11,10 @@ public class BasketQuery(AppDbContext dbContext) : IBasketQuery
         var basket = dbContext.Baskets.Where(bk => bk.Active);
         return await basket.SelectMany(bk => bk.BasketItems.Select(bi => bi.Ticker)).ToListAsync();
     }
+
+    public async Task<List<ActiveBasketDto>> GetActiveBasket()
+    {
+        var basket = dbContext.Baskets.Where(bk => bk.Active);
+        return await basket.SelectMany(bk => bk.BasketItems.Select(bi => new ActiveBasketDto(bi.Ticker, bi.Percentage))).ToListAsync();
+    }
 }

@@ -1,34 +1,35 @@
+using CompraProgramada.Domain.PurchaseContext.Models;
 using CompraProgramada.Domain.PurchaseContext.Services;
 
 namespace tests.CompraProgramada.Domain.Tests.PurchaseContext.Services;
 
 public class CalculationBuyOrdersToBuyServiceTest
 {
-    private static List<(string Ticker, decimal Percentage)> StandardBasket() =>
+    private static List<ActuallyTickerOfRecommendationBasket> StandardBasket() =>
     [
-        ("PETR4", 0.3m),
-        ("VALE3", 0.25m),
-        ("ITUB4", 0.2m),
-        ("BBDC4", 0.15m),
-        ("WEGE3", 0.1m)
+        new ("PETR4", 0.3m),
+        new ("VALE3", 0.25m),
+        new ("ITUB4", 0.2m),
+        new ("BBDC4", 0.15m),
+        new ("WEGE3", 0.1m)
     ];
 
-    private static List<(string Ticker, decimal Price)> StandardPrices() =>
+    private static List<ClosingPrice> StandardPrices() =>
     [
-        ("PETR4", 35m),
-        ("VALE3", 62m),
-        ("ITUB4", 30m),
-        ("BBDC4", 15m),
-        ("WEGE3", 40m)
+        new ("PETR4", 35m),
+        new ("VALE3", 62m),
+        new ("ITUB4", 30m),
+        new ("BBDC4", 15m),
+        new ("WEGE3", 40m)
     ];
 
-    private static List<(string Ticker, int Quantity)> EmptyMasterBalance() =>
+    private static List<MasterPreviousBalance> EmptyMasterBalance() =>
     [
-        ("PETR4", 0),
-        ("VALE3", 0),
-        ("ITUB4", 0),
-        ("BBDC4", 0),
-        ("WEGE3", 0)
+        new ("PETR4", 0),
+        new ("VALE3", 0),
+        new ("ITUB4", 0),
+        new ("BBDC4", 0),
+        new ("WEGE3", 0)
     ];
 
     [Fact]
@@ -68,9 +69,9 @@ public class CalculationBuyOrdersToBuyServiceTest
     {
         // Arrange
         var clients = new List<decimal> { 35000m };
-        var basket = new List<(string, decimal)> { ("PETR4", 0.3m) };
-        var prices = new List<(string, decimal)> { ("PETR4", 35m) };
-        var master = new List<(string, int)> { ("PETR4", 0) };
+        var basket = new List<ActuallyTickerOfRecommendationBasket> { new ("PETR4", 0.3m) };
+        var prices = new List<ClosingPrice> { new ("PETR4", 35m) };
+        var master = new List<MasterPreviousBalance> { new ("PETR4", 0) };
 
         // Act
         var result = CalculationBuyOrdersToBuyService.CalculateStocksToBuy(clients, basket, prices, master);
@@ -85,9 +86,9 @@ public class CalculationBuyOrdersToBuyServiceTest
     {
         // Arrange 
         var clients = new List<decimal> { 122500m };
-        var basket = new List<(string, decimal)> { ("PETR4", 0.3m) };
-        var prices = new List<(string, decimal)> { ("PETR4", 35m) };
-        var master = new List<(string, int)> { ("PETR4", 0) };
+        var basket = new List<ActuallyTickerOfRecommendationBasket> { new ("PETR4", 0.3m) };
+        var prices = new List<ClosingPrice> { new ("PETR4", 35m) };
+        var master = new List<MasterPreviousBalance> { new ("PETR4", 0) };
 
         // Act
         var result = CalculationBuyOrdersToBuyService.CalculateStocksToBuy(clients, basket, prices, master);
@@ -102,13 +103,13 @@ public class CalculationBuyOrdersToBuyServiceTest
     {
         // Arrange
         var clients = new List<decimal> { 3000m, 6000m, 1500m };
-        var master = new List<(string, int)>
+        var master = new List<MasterPreviousBalance>
         {
-            ("PETR4", 2),
-            ("VALE3", 0),
-            ("ITUB4", 1),
-            ("BBDC4", 0),
-            ("WEGE3", 0)
+            new ("PETR4", 2),
+            new ("VALE3", 0),
+            new ("ITUB4", 1),
+            new ("BBDC4", 0),
+            new ("WEGE3", 0)
         };
 
         // Act
@@ -126,9 +127,9 @@ public class CalculationBuyOrdersToBuyServiceTest
     {
         // Arrange 
         var clients = new List<decimal> { 1050m }; 
-        var basket = new List<(string, decimal)> { ("PETR4", 30m) };
-        var prices = new List<(string, decimal)> { ("PETR4", 35m) };
-        var master = new List<(string, int)> { ("PETR4", 100) };
+        var basket = new List<ActuallyTickerOfRecommendationBasket> { new ("PETR4", 30m) };
+        var prices = new List<ClosingPrice> { new ("PETR4", 35m) };
+        var master = new List<MasterPreviousBalance> { new ("PETR4", 100) };
 
         // Act
         var result = CalculationBuyOrdersToBuyService.CalculateStocksToBuy(clients, basket, prices, master);

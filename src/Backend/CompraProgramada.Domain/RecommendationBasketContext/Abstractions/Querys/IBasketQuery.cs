@@ -3,4 +3,5 @@ namespace CompraProgramada.Domain.RecommendationBasketContext.Abstractions.Query
 public interface IBasketQuery
 {
     Task<List<string>> GetCurrentTickersOfBasket();
+    Task<List<ActiveBasketDto>> GetActiveBasket();
 }

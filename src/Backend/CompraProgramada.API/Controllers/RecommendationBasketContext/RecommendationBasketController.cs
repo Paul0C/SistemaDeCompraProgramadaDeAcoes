@@ -11,7 +11,7 @@ public class RecommendationBasketController(IMediator mediator) : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Post(CreateRecommendationBasketCommand command)
+    public async Task<IActionResult> Post([FromBody] CreateRecommendationBasketCommand command)
     {
         var recommendationBasket = await mediator.Send(command);
         return recommendationBasket.IsSuccess

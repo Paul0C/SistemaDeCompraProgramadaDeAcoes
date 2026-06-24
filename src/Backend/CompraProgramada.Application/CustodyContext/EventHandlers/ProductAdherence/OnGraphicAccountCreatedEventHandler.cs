@@ -15,8 +15,6 @@ public class OnGraphicAccountCreatedEventHandler(ICustodyRepository custodyRepos
         {
             var custodyLot = Custody.Create(notification.GraphicAccountId, ticker);
             await custodyRepository.AddAsync(custodyLot);
-            var custodyFractional =  Custody.Create(notification.GraphicAccountId, ticker + "F");
-            await custodyRepository.AddAsync(custodyFractional);
         }
     }
 }

@@ -4,4 +4,4 @@ using CompraProgramada.Domain.SharedContext;
 
 namespace CompraProgramada.Domain.PurchaseContext.Events;
 
-public record PurchaseOfStocksEvent(List<OrderPurchased> StocksPurchased) : IDomainEvent;
+public record PurchaseOfStocksEvent(List<PurchasedOrder> StocksPurchased) : IDomainEvent;

@@ -12,7 +12,7 @@ public class ClientsController(IMediator mediator) : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [Route("Adhesion")]
-    public async Task<IActionResult> Adhesion(ProductAdherenceCommand command)
+    public async Task<IActionResult> Adhesion([FromBody] ProductAdherenceCommand command)
     {
         var client = await mediator.Send(command);
         return client.IsSuccess

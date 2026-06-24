@@ -6,9 +6,9 @@ public sealed class CalculationBuyOrdersToBuyService
 {
     public static List<StockToBuy> CalculateStocksToBuy(
         List<decimal> valueOfClients, 
-        List<(string Ticker, decimal Percentage)> actuallyBasket, 
-        List<(string Ticker, decimal Price)> closingPrices,
-        List<(string Ticker, int Quantity)> masterPreviousBalance)
+        List<ActuallyTickerOfRecommendationBasket> actuallyBasket, 
+        List<ClosingPrice> closingPrices,
+        List<MasterPreviousBalance> masterPreviousBalance)
     {
         var consolidatedValueOfClients = valueOfClients.Sum(c => c / 3);
         
